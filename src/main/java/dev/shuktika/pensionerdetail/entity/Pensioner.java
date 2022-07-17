@@ -1,17 +1,15 @@
 package dev.shuktika.pensionerdetail.entity;
 
+import dev.shuktika.pensionerdetail.constraints.BirthDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -19,25 +17,28 @@ import java.util.Date;
 @AllArgsConstructor
 public class Pensioner {
     @Id
-    @Size(min = 12, max = 12, message = "Pleas put 12 digits valid aadhar number")
+    @Min(value = 1000_0000_0000L, message = "Pleas put 12 digits valid aadhar number")
+    @Max(value = 9999_9999_9999L, message = "Pleas put 12 digits valid aadhar number")
     private Long aadharNumber;
 
     @NotBlank(message = "Name is required")
     private String name;
 
-    @NotBlank(message = "Date of birth is required")
-    private Date dateOfBirth;
+    @NotNull(message = "Date of birth is required")
+    @BirthDate(message = "The person should be greater than or equal to 60 years of age")
+    private LocalDate dateOfBirth;
 
     @NotBlank(message = "Pan is required")
     @Pattern(regexp = "[A-Z]{5}[0-9]{4}[A-z]{1}", flags = Pattern.Flag.UNICODE_CASE, message = "Pleas put valid pan")
     private String pan;
 
-    @NotBlank(message = "Last earned monthly salary is required")
+    @NotNull(message = "Last earned monthly salary is required")
     private Integer salaryEarned;
 
-    @NotBlank(message = "allowances is required")
+    @NotNull(message = "allowances is required")
     private Integer allowances;
 
+    @Pattern(regexp = "^(family|self)$", message = "Pension type can only be family or self")
     @NotBlank(message = "Pension type(self/family) is required")
     private String pensionType;
 
@@ -45,17 +46,3 @@ public class Pensioner {
     private BankDetails bankDetails;
 }
 
-@Embeddable
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-class BankDetails {
-    @NotBlank(message = "Bank name is required")
-    private String bankName;
-
-    @NotBlank(message = "accountNumber is required")
-    private Long accountNumber;
-
-    @NotBlank(message = "Bank type(public/private) is required")
-    private String bankType;
-}
