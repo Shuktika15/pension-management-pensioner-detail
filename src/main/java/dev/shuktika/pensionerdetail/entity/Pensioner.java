@@ -2,6 +2,7 @@ package dev.shuktika.pensionerdetail.entity;
 
 import dev.shuktika.pensionerdetail.constraints.BirthDate;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,12 +14,13 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pensioner {
     @Id
-    @Min(value = 1000_0000_0000L, message = "Pleas put 12 digits valid aadhar number")
-    @Max(value = 9999_9999_9999L, message = "Pleas put 12 digits valid aadhar number")
+    @Min(value = 1000_0000_0000L, message = "Please put 12 digits valid aadhar number")
+    @Max(value = 9999_9999_9999L, message = "Please put 12 digits valid aadhar number")
     private Long aadharNumber;
 
     @NotBlank(message = "Name is required")

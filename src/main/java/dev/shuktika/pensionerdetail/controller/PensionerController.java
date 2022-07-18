@@ -1,30 +1,21 @@
 package dev.shuktika.pensionerdetail.controller;
 
 import dev.shuktika.pensionerdetail.entity.Pensioner;
-import dev.shuktika.pensionerdetail.service.PensionerSevice;
+import dev.shuktika.pensionerdetail.service.PensionerService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/pensionerDetail")
-@Slf4j
 @RequiredArgsConstructor
 public class PensionerController {
-    private final PensionerSevice pensionerSevice;
-
-    @PostMapping("/pensioner")
-    public Pensioner savePensioner(@Valid @RequestBody Pensioner pensioner) {
-        log.info("Inside savePensioner of PensionerController");
-        return pensionerSevice.savePensioner(pensioner);
-    }
+    private final PensionerService pensionerService;
 
     @GetMapping("/pensionDetailsByAadhar")
     public Pensioner fetchPersonByAadharNumber(@RequestParam("aadharNumber") Long aadharNumber) {
-        Pensioner pensioner = pensionerSevice.fetchPersonByAadharNumber(aadharNumber);
-        log.info("Get Request for '/pensionDetailsByAadhar/{}' response: {}", aadharNumber, pensioner.toString());
-        return pensioner;
+        return pensionerService.fetchPersonByAadharNumber(aadharNumber);
     }
 }

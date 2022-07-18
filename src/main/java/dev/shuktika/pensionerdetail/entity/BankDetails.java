@@ -1,6 +1,7 @@
 package dev.shuktika.pensionerdetail.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +12,10 @@ import javax.validation.constraints.Pattern;
 
 @Embeddable
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-class BankDetails {
+public class BankDetails {
     @NotBlank(message = "Bank name is required")
     private String bankName;
 
