@@ -31,7 +31,7 @@ public class Pensioner {
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "Pan is required")
-    @Pattern(regexp = "[A-Z]{5}[0-9]{4}[A-z]{1}", flags = Pattern.Flag.UNICODE_CASE, message = "Pleas put valid pan")
+    @Pattern(regexp = "[A-Z]{5}[0-9]{4}[A-z]{1}", flags = Pattern.Flag.UNICODE_CASE, message = "Please put valid pan")
     private String pan;
 
     @NotNull(message = "Last earned monthly salary is required")

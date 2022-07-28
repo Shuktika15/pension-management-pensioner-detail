@@ -18,6 +18,11 @@ Content-Type: application/json
 }
 
 
-### Get
+### Get pension details from aadhar number
 GET http://localhost:8000/pensionerDetail/pensionDetailsByAadhar?aadharNumber=123415123438
+Accept: application/json
+
+
+### Get pensioner details from wrong aadhar number
+GET http://localhost:8000/pensionerDetail/pensionDetailsByAadhar?aadharNumber=123415123431
 Accept: application/json

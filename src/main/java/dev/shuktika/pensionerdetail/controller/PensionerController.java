@@ -3,6 +3,8 @@ package dev.shuktika.pensionerdetail.controller;
 import dev.shuktika.pensionerdetail.entity.Pensioner;
 import dev.shuktika.pensionerdetail.service.PensionerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +17,7 @@ public class PensionerController {
     private final PensionerService pensionerService;
 
     @GetMapping("/pensionDetailsByAadhar")
-    public Pensioner fetchPersonByAadharNumber(@RequestParam("aadharNumber") Long aadharNumber) {
-        return pensionerService.fetchPersonByAadharNumber(aadharNumber);
+    public ResponseEntity<Pensioner> fetchPersonByAadharNumber(@RequestParam("aadharNumber") Long aadharNumber) {
+        return new ResponseEntity<>(pensionerService.fetchPersonByAadharNumber(aadharNumber), HttpStatus.OK);
     }
 }
