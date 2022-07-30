@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class CsvUtil {
     private Resource resource;
 
     public List<Pensioner> readPensionerFromCsv() {
-        try (Reader reader = new FileReader(resource.getFile())) {
+        try (Reader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
             log.info("Reading pensioner data from pensioners.csv");
             return new CsvToBeanBuilder<PensionerCsv>(reader)
                     .withType(PensionerCsv.class)
