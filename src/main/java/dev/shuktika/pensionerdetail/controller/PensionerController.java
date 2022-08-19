@@ -18,6 +18,6 @@ public class PensionerController {
 
     @GetMapping("/pensionDetailsByAadhar")
     public ResponseEntity<Pensioner> fetchPersonByAadharNumber(@RequestParam("aadharNumber") Long aadharNumber) {
-        return new ResponseEntity<>(pensionerService.fetchPersonByAadharNumber(aadharNumber), HttpStatus.OK);
+        return new ResponseEntity<>(pensionerService.fetchPensionerByAadharNumber(aadharNumber), HttpStatus.OK);
     }
 }

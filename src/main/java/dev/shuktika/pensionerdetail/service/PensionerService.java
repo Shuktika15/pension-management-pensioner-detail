@@ -14,16 +14,16 @@ public class PensionerService {
     private final PensionerRepository pensionerRepository;
 
     public Pensioner savePensioner(Pensioner pensioner) {
-        Pensioner p = pensionerRepository.save(pensioner);
+        var p = pensionerRepository.save(pensioner);
         log.info("Pensioner saved : {}", p);
         return p;
     }
 
-    public Pensioner fetchPersonByAadharNumber(Long aadharNumber) {
+    public Pensioner fetchPensionerByAadharNumber(Long aadharNumber) {
         return pensionerRepository
                 .findByAadharNumber(aadharNumber)
                 .orElseThrow(() -> {
-                    String errMsg = String.format("Pensioner with Aadhar Number %s not found", aadharNumber);
+                    var errMsg = String.format("Pensioner with Aadhar Number %s not found", aadharNumber);
                     log.error(errMsg);
                     return new PensionerNotFoundException(errMsg);
                 });
