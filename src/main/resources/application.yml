@@ -52,5 +52,19 @@ eureka:
 ---
 
 spring:
+  config:
+    activate:
+      on-profile: aws
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${AWS_URL:http://shuktika-service-registry-lb-1645211513.ap-south-1.elb.amazonaws.com/eureka}
+
+---
+
+spring:
   profiles:
-    active: ${PROFILE:dev}
+    active: ${PROFILE:aws}
