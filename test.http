@@ -17,7 +17,6 @@ Content-Type: application/json
   }
 }
 
-
 ### Get pension details from aadhar number
 GET http://localhost:8000/pensionerDetail/pensionDetailsByAadhar?aadharNumber=123415123438
 Accept: application/json
